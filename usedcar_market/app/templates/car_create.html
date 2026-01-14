@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}发布车辆{% endblock %}
+{% block content %}
+<h2>发布车辆</h2>
+<form method="post" enctype="multipart/form-data">
+  {{ form.csrf_token }}
+  <div class="mb-2">{{ form.title.label }} {{ form.title(class="form-control") }}</div>
+  <div class="mb-2">{{ form.brand.label }} {{ form.brand(class="form-control") }}</div>
+  <div class="mb-2">{{ form.model.label }} {{ form.model(class="form-control") }}</div>
+  <div class="mb-2">{{ form.year.label }} {{ form.year(class="form-control") }}</div>
+  <div class="mb-2">{{ form.mileage_km.label }} {{ form.mileage_km(class="form-control") }}</div>
+  <div class="mb-2">{{ form.price.label }} {{ form.price(class="form-control") }}</div>
+  <div class="mb-2">{{ form.city.label }} {{ form.city(class="form-control") }}</div>
+  <div class="mb-2">{{ form.description.label }} {{ form.description(class="form-control", rows="4") }}</div>
+  <div class="mb-2">{{ form.image.label }} {{ form.image(class="form-control") }}</div>
+  {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}

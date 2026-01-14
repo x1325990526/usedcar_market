@@ -1,0 +1,112 @@
+/* 你可以在这里添加自定义样式 */
+.hero {
+  min-height: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,0.65), rgba(0,0,0,0.15)),
+    url("../img/hero.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-content {
+  padding: 56px 40px;
+  color: #fff;
+  max-width: 720px;
+}
+
+.hero h1 {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.hero p {
+  margin-top: 12px;
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+/* ===== Top Nav (minimal) ===== */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.topnav-inner {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  color: #111;
+  text-decoration: none;
+}
+
+
+
+.links, .actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.links {
+  gap: 50px;
+  
+}
+
+.topnav a {
+  color: #333;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.topnav a:hover {
+  color: #0d6efd;
+}
+
+.topnav a.active {
+  color: #0d6efd;
+  font-weight: 600;
+}
+
+.user {
+  color: #666;
+  font-size: 0.92rem;
+}
+
+/* 简约按钮 */
+.btn-solid {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #0d6efd;
+  color: #fff !important;
+  font-weight: 600;
+}
+.btn-solid:hover {
+  background: #0b5ed7;
+}
+
+.btn-link {
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+.btn-link:hover {
+  background: rgba(13,110,253,0.08);
+}
+
+/* 让导航在 container 里对齐（你 body 已经是 container） */
+@media (max-width: 576px) {
+  .user { display: none; }
+  .links { gap: 10px; }
+}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}车辆列表{% endblock %}
+{% block content %}
+<h2>车辆列表</h2>
+
+<form class="row g-2 mb-3" method="get">
+  <div class="col-md-3">
+    <input class="form-control" name="q" placeholder="关键字" value="{{ request.args.get('q','') }}">
+  </div>
+  <div class="col-md-2">
+    <input class="form-control" name="brand" placeholder="品牌" value="{{ request.args.get('brand','') }}">
+  </div>
+  <div class="col-md-2">
+    <input class="form-control" name="city" placeholder="城市" value="{{ request.args.get('city','') }}">
+  </div>
+  <div class="col-md-2">
+    <input class="form-control" name="min_price" placeholder="最低价" value="{{ request.args.get('min_price','') }}">
+  </div>
+  <div class="col-md-2">
+    <input class="form-control" name="max_price" placeholder="最高价" value="{{ request.args.get('max_price','') }}">
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-outline-primary w-100">筛选</button>
+  </div>
+</form>
+
+<div class="list-group">
+  {% for car in cars %}
+    <a class="list-group-item list-group-item-action" href="{{ url_for('car_detail', car_id=car.id) }}">
+      <div class="d-flex justify-content-between">
+        <div>
+          <div><strong>{{ car.title }}</strong></div>
+          <div class="text-muted">{{ car.brand }} {{ car.model }} · {{ car.year }} · {{ car.mileage_km }}km · {{ car.city }}</div>
+        </div>
+        <div class="text-danger">￥{{ car.price }}</div>
+      </div>
+    </a>
+  {% else %}
+    <div class="text-muted">暂无车辆</div>
+  {% endfor %}
+</div>
+{% endblock %}

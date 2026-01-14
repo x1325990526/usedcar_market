@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}车辆详情{% endblock %}
+{% block content %}
+<h2>{{ car.title }}</h2>
+
+{% if car.image_filename %}
+  <img class="img-fluid mb-3" style="max-height:360px"
+       src="{{ url_for('static', filename='uploads/' ~ car.image_filename) }}">
+{% endif %}
+
+<ul>
+  <li>品牌：{{ car.brand }}</li>
+  <li>车型：{{ car.model }}</li>
+  <li>年份：{{ car.year }}</li>
+  <li>里程：{{ car.mileage_km }} km</li>
+  <li>城市：{{ car.city }}</li>
+  <li>价格：￥{{ car.price }}</li>
+  <li>卖家：{{ car.seller.username }}</li>
+</ul>
+<p>{{ car.description }}</p>
+
+{% if current_user.is_authenticated %}
+<form method="post" action="{{ url_for('car_favorite', car_id=car.id) }}">
+  <button class="btn {{ 'btn-outline-secondary' if is_fav else 'btn-primary' }}">{{ "取消收藏" if is_fav else "收藏" }}</button>
+</form>
+{% endif %}
+{% if current_user.is_authenticated and (current_user.id == car.seller_id or current_user.is_admin) %}
+  <div class="d-flex gap-2 my-3">
+    <a class="btn btn-outline-primary" href="{{ url_for('car_edit', car_id=car.id) }}">编辑</a>
+
+    <form method="post" action="{{ url_for('car_withdraw', car_id=car.id) }}"
+          onsubmit="return confirm('确定下架吗？下架后将不会出现在车辆列表中。');">
+      {{ form.csrf_token }}
+      <button class="btn btn-outline-danger" type="submit">车辆下架</button>
+    </form>
+  </div>
+{% endif %}
+<hr>
+<h4>留言咨询</h4>
+<form method="post">
+  {{ form.csrf_token }}
+  <div class="mb-2">{{ form.content(class="form-control", placeholder="想问卖家的问题...") }}</div>
+  {{ form.submit(class="btn btn-primary") }}
+</form>
+
+<div class="mt-3">
+  {% for m in messages %}
+    <div class="border rounded p-2 mb-2">
+      <div class="small text-muted">{{ m.user.username }} · {{ m.created_at }}</div>
+      <div>{{ m.content }}</div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

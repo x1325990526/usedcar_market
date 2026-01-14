@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="hero mb-4">
+  <div class="hero-content">
+    <h1>二手汽车交易平台</h1>
+    <p>快速浏览、发布车辆信息，支持收藏与留言咨询。</p>
+
+    <div class="d-flex gap-2 mt-3">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('car_list') }}">开始浏览</a>
+      {% if current_user.is_authenticated %}
+        <a class="btn btn-outline-light btn-lg" href="{{ url_for('car_create') }}">发布车辆</a>
+      {% else %}
+        <a class="btn btn-outline-light btn-lg" href="{{ url_for('register') }}">立即注册</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="border rounded p-3 h-100">
+      <h5>真实信息</h5>
+      <div class="text-muted">发布车辆参数、里程、价格与描述。</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="border rounded p-3 h-100">
+      <h5>快速筛选</h5>
+      <div class="text-muted">按品牌、城市、价格区间检索。</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="border rounded p-3 h-100">
+      <h5>收藏与咨询</h5>
+      <div class="text-muted">喜欢就收藏，问题直接留言给卖家。</div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
